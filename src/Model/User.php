@@ -20,16 +20,6 @@ class User
     }
 
     /**
-     * Gets the value of name.
-     *
-     * @return mixed
-     */
-    public function getNamed()
-    {
-
-    }
-
-    /**
      * Gets the value of firstname.
      *
      * @return mixed

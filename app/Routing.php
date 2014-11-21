@@ -13,8 +13,24 @@ class Routing
 
 		$roots["create"] =
 		[
+			"pattern" => 'creation-user',
 			"action" => ["home", "create"],
-			"params" => ["str", "ok"]
+			"params" => [],
+			"method" => "POST"
+		];
+
+		$roots["new"] =
+		[
+			"pattern" => 'creation-new',
+			"action" => ["home", "new"],
+
+		];
+
+		$roots["test"] =
+		[
+			"pattern" => 'patternTest{var1}/{var2}',
+			"action" => ["home", "test"],
+			"params" => ['var1', 'var2'],
 		];
 
 		return $roots;

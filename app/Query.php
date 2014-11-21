@@ -7,7 +7,6 @@ class Query
 	private $string_sql;
 	private $typeQuery;
 	private $tableName;
-	private $model;
 	private $where;
 	private $fields = '';
 	private $values = '';
@@ -15,9 +14,11 @@ class Query
 
 	public function __construct($model)
 	{
-		$entity = new \ReflectionObject($model);
-		$this->model = $model;
-		$this->tableName = $entity->getShortName();
+		if (is_string($model)) $this->tableName = $model;
+		else if(is_object($model)){
+			$entity = new \ReflectionObject($model);
+			$this->tableName = $entity->getShortName();
+		}
 
 		return $this;
 	}

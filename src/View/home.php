@@ -1,46 +1,32 @@
 <?php use App\HtmlHelper; ?>
 
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>QuickSimplePHP</title>
-	</head>
-	<body>
-		<h1>Accueil</h1>
 
-		<a href="<?= HtmlHelper::link('create'); ?>">lien</a>
-		<table>
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Surname</th>
-					<th>Telephone</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr>
-					<td>Jack</td>
-					<td>Sales</td>
-					<td>555-5555</td>
-				</tr>
-				<tr>
-					<td>John</td>
-					<td>Admin</td>
-					<td>555-5555</td>
-				</tr>
-				<tr>
-					<td>James</td>
-					<td>Sales</td>
-					<td>555-5555</td>
-				</tr>
-			<tbody>
-			<tfoot>
-				<tr>
-					<td>Total</td>
-					<td>Total</td>
-					<td>Total</td>
-				</tr>
-			</tfoot>
-		</table>
-	</body>
-</html>
+<h1>Accueil</h1>
+<table>
+	<thead>
+		<tr>
+			<th>Name</th>
+			<th>Firstname</th>
+			<th>Date</th>
+		</tr>
+	</thead>
+	<tbody>
+		<?php foreach ($list as $user) : ?>
+		<tr>
+			<td><?= $user->Name ?></td>
+			<td><?= $user->Firstname ?></td>
+			<td><?= $user->Date ?></td>
+		</tr>
+		<?php endforeach; ?>
+	<tbody>
+
+	<form action="<?= HtmlHelper::link('create'); ?>" method="POST">
+		<?= HtmlHelper::createForm($userForm); ?>
+		<input type="submit">
+	</form>
+
+</table>
+
+<p><a href="<?= HtmlHelper::link('test', [65,88]); ?>">Ajouter </a></p>
+
+<p><a href="<?= HtmlHelper::link('new',[65,545]); ?>">new </a></p>
