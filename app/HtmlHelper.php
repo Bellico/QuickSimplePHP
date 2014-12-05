@@ -7,6 +7,9 @@ class HtmlHelper
 	public static function link($nameRoot, $params = [])
 	{
 		$roots = Routing::RootConfig();
+
+		if(!isset($roots[$nameRoot])) return $nameRoot;
+
 		$root = $roots[$nameRoot];
 
 		if(isset($root['pattern'])){
@@ -26,11 +29,7 @@ class HtmlHelper
 
 	public static function createForm($entity)
 	{
-		$form = self::input('formType', get_class($entity), 'hidden');
-		foreach ($entity as $propertie => $value) {
-			$form .= self::input($propertie, $value);
-		}
-		return $form;
+		return Form::createForm($entity);
 	}
 
 	public static function input($name, $value = null, $type = 'text')

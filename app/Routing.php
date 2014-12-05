@@ -11,26 +11,28 @@ class Routing
 			"action" => ["home", "index"]
 		];
 
-		$roots["create"] =
+		$roots["createForm"] =
 		[
-			"pattern" => 'creation-user',
-			"action" => ["home", "create"],
-			"params" => [],
+			"pattern" => 'create-user',
+			"action" => ["home", "createForm"]
+		];
+
+		$roots["createPost"] =
+		[
+			"action" => ["home", "createPost"],
 			"method" => "POST"
 		];
 
-		$roots["new"] =
+		$roots["edit"] =
 		[
-			"pattern" => 'creation-new',
-			"action" => ["home", "new"],
-
+			"action" => ["home", "edit"],
+			"params" => ['id'],
 		];
 
-		$roots["test"] =
+		$roots["delete"] =
 		[
-			"pattern" => 'patternTest{var1}/{var2}',
-			"action" => ["home", "test"],
-			"params" => ['var1', 'var2'],
+			"action" => ["home", "delete"],
+			"params" => ['id'],
 		];
 
 		return $roots;

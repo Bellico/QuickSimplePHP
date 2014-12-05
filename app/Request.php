@@ -24,7 +24,7 @@ class Request
 		$request->action = (isset($data[1])) ? $data[1] : null;
 		$request->params = (!empty($data[2])) ? array_slice($data, 2) : [];
 		$request->post = $_POST;
-		$request->formType = Form::Create($request->post);
+		$request->formType = Form::createModelFromPost($request->post);
 
 		return $request;
 	}

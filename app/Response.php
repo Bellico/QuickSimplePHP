@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\HtmlHelper;
+
 class Response
 {
 	private $view;
@@ -50,6 +52,7 @@ class Response
 
 	public function Redirect($link)
 	{
+		$link = HtmlHelper::link($link);
 		header("Location:$link");
 	}
 

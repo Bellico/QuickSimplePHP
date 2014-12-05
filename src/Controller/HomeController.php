@@ -11,50 +11,49 @@ class HomeController extends Controller
 {
 	public function indexAction()
 	{
-		$user = new User;
-
-		$user->name = "Martinne";
-		$user->firstname = "<script> alert('ok'); </script>";
-
-
 		$userDb = $this->getContext('User');
 		$listUser = $userDb->SelectAll();
 
 		$response = $this->createResponse();
-
 		$response->RenderHtml('home', ['list' => $listUser]);
-		$response->set('userForm', $user);
+
 
 		return $response;
 	}
 
-	public function createAction(User $ff)
+	public function createFormAction()
 	{
-
-		$user = new User;
-		$user->name = "Martinne";
-		$user->firstname = "Francky";
-
-		//$listUser = $this->getContext()->save($user);
-
-		$response = new Response('createAction');
+		$response = $this->createResponse();
+		$response->RenderHtml('formUser');
+		$response->set('userForm', new User);
 
 		return $response;
 	}
 
-	public function newAction()
+	public function createPostAction(User $user)
 	{
-
-
-
-		$response = new Response('newAction');
+		$this->getContext()->save($user);
+		$response = new Response;
+		$response->Redirect('default');
 
 		return $response;
 	}
 
-	public function testAction($var1, $var2)
+	public function editAction($id)
 	{
-		$response = new Response('testAction : ' . $var1 . '<>' . $var2);
+		$response = $this->createResponse();
+		$response->RenderHtml('formUser');
+		$response->set('userForm', new User);
+
+		return $response;
+	}
+
+	public function deleteAction($id)
+	{
+		$this->getContext('User')->delete($id);
+		$response = new Response;
+		$response->Redirect('default');
+
 		return $response;
 	}
 

@@ -1,13 +1,15 @@
 <?php use App\HtmlHelper; ?>
 
-
 <h1>Accueil</h1>
+
 <table>
 	<thead>
 		<tr>
 			<th>Name</th>
 			<th>Firstname</th>
 			<th>Date</th>
+			<th>Edit</th>
+			<th>Delete</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -16,17 +18,12 @@
 			<td><?= $user->Name ?></td>
 			<td><?= $user->Firstname ?></td>
 			<td><?= $user->Date ?></td>
+			<td><a href="<?= HtmlHelper::link('edit',[$user->id]); ?>">Edit</a></td>
+			<td><a href="<?= HtmlHelper::link('delete',[$user->id]); ?>">Delete</a></td>
 		</tr>
 		<?php endforeach; ?>
 	<tbody>
-
-	<form action="<?= HtmlHelper::link('create'); ?>" method="POST">
-		<?= HtmlHelper::createForm($userForm); ?>
-		<input type="submit">
-	</form>
-
 </table>
 
-<p><a href="<?= HtmlHelper::link('test', [65,88]); ?>">Ajouter </a></p>
+<p><a href="<?= HtmlHelper::link('createForm'); ?>">Ajouter </a></p>
 
-<p><a href="<?= HtmlHelper::link('new',[65,545]); ?>">new </a></p>
