@@ -62,7 +62,8 @@ class Request
 	public static function getResponse(Request $req)
 	{
 		$request = self::match($req);
-		$controller_name = "Controller\\{$request->controller}Controller";
+		$nameApp = Routing::getNameApp();
+		$controller_name = "$nameApp\Controller\\{$request->controller}Controller";
 		$controller = new \ReflectionClass($controller_name);
 		$action = $controller->getMethod("{$request->action}Action");
 		$response = $action->invokeArgs($controller->newInstance($request), $request->params + [$request->formType]);
@@ -72,7 +73,9 @@ class Request
 
 	public static function match(Request $request)
 	{
-		$roots = Routing::RootConfig();
+		$roots = Routing::getRootConfig();
+
+		if(!$roots) throw new \Exception("Root not match");
 
 		if($request->controller == null && $request->action == null)
 			return self::createFromRoot($roots['default']);
@@ -88,7 +91,7 @@ class Request
 			}
 		}
 
-		throw new \Exception("Root not match");
+		return self::match($request);
 	}
 
 	public function isEqual(Request $request)

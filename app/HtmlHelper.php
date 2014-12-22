@@ -4,9 +4,9 @@ namespace App;
 
 class HtmlHelper
 {
-	public static function link($nameRoot, $params = [])
+	public static function link($nameRoot, $params = [], $nameApp = null)
 	{
-		$roots = Routing::RootConfig();
+		$roots = Routing::getRootByApp($nameApp);
 
 		if(!isset($roots[$nameRoot])) return $nameRoot;
 

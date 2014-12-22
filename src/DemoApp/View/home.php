@@ -15,9 +15,9 @@
 	<tbody>
 		<?php foreach ($list as $user) : ?>
 		<tr>
-			<td><?= $user->Name ?></td>
-			<td><?= $user->Firstname ?></td>
-			<td><?= $user->Date ?></td>
+			<td><?= $user->name ?></td>
+			<td><?= $user->firstname ?></td>
+			<td><?= $user->date ?></td>
 			<td><a href="<?= HtmlHelper::link('edit',[$user->id]); ?>">Edit</a></td>
 			<td><a href="<?= HtmlHelper::link('delete',[$user->id]); ?>">Delete</a></td>
 		</tr>
@@ -26,4 +26,3 @@
 </table>
 
 <p><a href="<?= HtmlHelper::link('createForm'); ?>">Ajouter </a></p>
-

@@ -21,8 +21,9 @@ class Response
 	{
 		if($this->view != null){
 			extract($this->varsView);
-			$_pageContent = APP_DIR . 'src/view/' . $this->view . '.php';
-			require APP_DIR . 'src/view/' . $this->layout;
+			$dir = APP_DIR . 'src' . DIRECTORY_SEPARATOR . Routing::getNameApp() . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
+			$_pageContent = $dir . $this->view . '.php';
+			require $dir . $this->layout;
 		}
 		else if($this->type == 'json') $this->sendJson();
 		else echo $this->content;

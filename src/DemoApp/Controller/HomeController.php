@@ -1,11 +1,11 @@
 <?php
 
-namespace Controller;
+namespace DemoApp\Controller;
 
 use App\Controller;
 use App\Response;
 use App\Form;
-use Model\User;
+use DemoApp\Model\User;
 
 class HomeController extends Controller
 {
@@ -13,10 +13,8 @@ class HomeController extends Controller
 	{
 		$userDb = $this->getContext('User');
 		$listUser = $userDb->SelectAll();
-
 		$response = $this->createResponse();
 		$response->RenderHtml('home', ['list' => $listUser]);
-
 
 		return $response;
 	}
@@ -41,6 +39,8 @@ class HomeController extends Controller
 
 	public function editAction($id)
 	{
+		//$user = $this->getContext('User')->find($id);
+
 		$response = $this->createResponse();
 		$response->RenderHtml('formUser');
 		$response->set('userForm', new User);

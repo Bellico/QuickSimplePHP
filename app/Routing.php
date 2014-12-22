@@ -4,37 +4,31 @@ namespace App;
 
 class Routing
 {
-	public static function RootConfig()
+	static private $i = -1;
+
+	public static function getRootConfig()
 	{
-		$roots["default"] =
-		[
-			"action" => ["home", "index"]
-		];
+		self::$i ++;
 
-		$roots["createForm"] =
-		[
-			"pattern" => 'create-user',
-			"action" => ["home", "createForm"]
-		];
+		if(!isset(Config::$appEnable[self::$i])) return false;
 
-		$roots["createPost"] =
-		[
-			"action" => ["home", "createPost"],
-			"method" => "POST"
-		];
+		$appFolder = Config::$appEnable[self::$i];
 
-		$roots["edit"] =
-		[
-			"action" => ["home", "edit"],
-			"params" => ['id'],
-		];
+		return self::getRootByApp($appFolder);
+	}
 
-		$roots["delete"] =
-		[
-			"action" => ["home", "delete"],
-			"params" => ['id'],
-		];
+	public static function getNameApp()
+	{
+		return Config::$appEnable[self::$i];
+	}
 
-		return $roots;
+	public static function getRootByApp($app = null)
+	{
+		if($app == null) $app = Config::$appEnable[0];
+		$routing_name = "$app\\Config\\Routing";
+		$routing = new \ReflectionClass($routing_name);
+		$rootConfig = $routing->getMethod("RootConfig");
+
+		return $rootConfig->invoke(null);
 	}
 }
