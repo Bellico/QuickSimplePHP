@@ -27,6 +27,11 @@ class HtmlHelper
 		return 'http://' . $_SERVER['SERVER_NAME'] . Request::$BASE_URL . WEB_FOLDER . $relative;
 	}
 
+	public static function script($name)
+	{
+		return 'http://' . $_SERVER['SERVER_NAME'] . Request::$BASE_URL . WEB_FOLDER . Routing::getNameApp() . '/js/' . $name;
+	}
+
 	public static function createForm($entity)
 	{
 		return Form::createForm($entity);

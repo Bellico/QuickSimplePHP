@@ -26,11 +26,11 @@ class Controller
 		return $this->request;
 	}
 
-	public function createResponse()
+	public function response()
 	{
 		$response = new Response;
 		$response->setLayout('layout.php');
-		$response->set('_pageTitle', $this->request->action);
+		$response->setTitle($this->request->action);
 
 		return $response;
 	}

@@ -20,12 +20,19 @@ class Response
 	public function send()
 	{
 		if($this->view != null){
+
 			extract($this->varsView);
 			$dir = APP_DIR . 'src' . DIRECTORY_SEPARATOR . Routing::getNameApp() . DIRECTORY_SEPARATOR . 'view' . DIRECTORY_SEPARATOR;
 			$_pageContent = $dir . $this->view . '.php';
-			require $dir . $this->layout;
+
+			if($this->layout != null)
+				require $dir . $this->layout;
+			else
+				require $_pageContent;
 		}
+
 		else if($this->type == 'json') $this->sendJson();
+
 		else echo $this->content;
 	}
 
@@ -39,25 +46,30 @@ class Response
 		$this->layout = $layout;
 	}
 
-	public function RenderHtml($view, $varsView = [])
+	public function setTitle($title)
+	{
+		$this->varsView['_pageTitle'] = $title;
+	}
+
+	public function render($view, $varsView = [])
 	{
 		$this->view = $view;
 		$this->varsView += $varsView;
 	}
 
-	public function RenderJson($data)
+	public function renderJson($data)
 	{
 		$this->content = $data;
 		$this->type = 'json';
 	}
 
-	public function Redirect($link)
+	public function redirect($link)
 	{
 		$link = HtmlHelper::link($link);
 		header("Location:$link");
 	}
 
-	public function NotFound()
+	public function notFound()
 	{
 		header("HTTP/1.0 404 Not Found");
 		$this->view = 'error';

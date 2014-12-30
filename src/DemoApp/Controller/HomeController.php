@@ -13,16 +13,18 @@ class HomeController extends Controller
 	{
 		$userDb = $this->getContext('User');
 		$listUser = $userDb->SelectAll();
-		$response = $this->createResponse();
-		$response->RenderHtml('home', ['list' => $listUser]);
+		$response = new Response;
+		$response->setLayout('layout.php');
+		$response->render('home', ['list' => $listUser]);
 
 		return $response;
 	}
 
 	public function createFormAction()
 	{
-		$response = $this->createResponse();
-		$response->RenderHtml('formUser');
+		$response = new Response;
+		$response->setLayout('layout.php');
+		$response->render('formUser');
 		$response->set('userForm', new User);
 
 		return $response;
@@ -41,8 +43,9 @@ class HomeController extends Controller
 	{
 		//$user = $this->getContext('User')->find($id);
 
-		$response = $this->createResponse();
-		$response->RenderHtml('formUser');
+		$response = new Response;
+		$response->setLayout('layout.php');
+		$response->render('formUser');
 		$response->set('userForm', new User);
 
 		return $response;
